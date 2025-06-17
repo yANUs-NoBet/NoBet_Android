@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="title">24dp</dimen>
+    <dimen name="body_1">20dp</dimen>
+    <dimen name="body_2">18dp</dimen>
+    <dimen name="body_3">16dp</dimen>
+    <dimen name="body_4">14dp</dimen>
+    <dimen name="body_5">12dp</dimen>
+    <dimen name="body_6">10dp</dimen>
+    <dimen name="radius_1">8dp</dimen>
+    <dimen name="radius_2">16dp</dimen>
+    <dimen name="radius_3">24dp</dimen>
+    <dimen name="radius_4">32dp</dimen>
+</resources>
