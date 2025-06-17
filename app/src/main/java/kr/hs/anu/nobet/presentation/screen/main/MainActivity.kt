@@ -1,4 +1,4 @@
-package kr.hs.anu.nobet.presentatoin.screen.main
+package kr.hs.anu.nobet.presentation.screen.main
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
