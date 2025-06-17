@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">NoBet</string>
+    <string name="top_title">Gambling Site Blocker</string>
+    <string name="off_view_title">클릭 한 번으로 안심할 수 있어요</string>
+    <string name="num_info">365일 오전 9시 ~ 오후 10시까지 국번 없이 “1336”</string>
+    <string name="mobile_info">온라인 상담 바로가기</string>
 </resources>
