@@ -13,7 +13,7 @@ import kr.hs.anu.nobet.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel : MainViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,17 +30,25 @@ class MainActivity : AppCompatActivity() {
         //버튼 상태값 읽고 값에 따라 상태 바꾸기
         viewModel.btnState.observe(this) { btnState ->
             //차단 전원 버튼 색 변경
-            binding.layoutBlockBtn.setBackgroundResource (
-                if(btnState) R.drawable.block_btn_on else R.drawable.block_btn_background
+            binding.layoutBlockBtn.setBackgroundResource(
+                if (btnState) R.drawable.block_btn_on else R.drawable.block_btn_background
             )
 
             //차단된 사이트 수 텍스트 색 변경
-            val block_txt_color = ContextCompat.getColor(this, if (btnState) R.color.red else R.color.gray)
+            val block_txt_color =
+                ContextCompat.getColor(this, if (btnState) R.color.red else R.color.gray)
             binding.tvBlockNum.setTextColor(block_txt_color)
 
             //차단 전원 버튼 아이콘 색 변경
-            val power_icon_color = ContextCompat.getColor(this, if(btnState) R.color.white else R.color.black)
+            val power_icon_color =
+                ContextCompat.getColor(this, if (btnState) R.color.white else R.color.black)
             binding.ivPower.setColorFilter(power_icon_color, PorterDuff.Mode.SRC_IN)
+
+            //TODO 상담 정보 박스 색 변경
+
+            //방어중 타이틀 텍스트 변경
+            binding.tvViewTitle.text =
+                getString(if (btnState) R.string.on_view_title else R.string.off_view_title)
         }
 
         binding.layoutBlockBtn.setOnClickListener {
