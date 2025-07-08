@@ -44,7 +44,10 @@ class MainActivity : AppCompatActivity() {
                 ContextCompat.getColor(this, if (btnState) R.color.white else R.color.black)
             binding.ivPower.setColorFilter(power_icon_color, PorterDuff.Mode.SRC_IN)
 
-            //TODO 상담 정보 박스 색 변경
+            //상담 정보 박스 색 변경
+            binding.layoutGamblingPreventInfoBox.setBackgroundResource(
+                if (btnState) R.drawable.gambling_prevent_info_box_on else R.drawable.gambling_prevent_info_box
+            )
 
             //방어중 타이틀 텍스트 변경
             binding.tvViewTitle.text =
