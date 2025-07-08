@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/menu_box_background">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/menu_login"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginVertical="15dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/menu_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_profile"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_person"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/pretendard_light"
+            android:text="로그인"
+            android:textColor="@color/black"
+            android:textSize="@dimen/body_6"
+            app:layout_constraintEnd_toEndOf="@id/iv_profile"
+            app:layout_constraintStart_toStartOf="@id/iv_profile"
+            app:layout_constraintTop_toBottomOf="@id/iv_profile" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/menu_block_pass"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/menu_background"
+        app:layout_constraintBottom_toBottomOf="@id/menu_login"
+        app:layout_constraintEnd_toStartOf="@id/menu_log"
+        app:layout_constraintStart_toEndOf="@id/menu_login"
+        app:layout_constraintTop_toTopOf="@id/menu_login">
+
+        <ImageView
+            android:id="@+id/iv_shield"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_shield"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_block_pass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/pretendard_light"
+            android:text="차단 제외 하기"
+            android:textColor="@color/black"
+            android:textSize="@dimen/body_6"
+            app:layout_constraintEnd_toEndOf="@id/iv_shield"
+            app:layout_constraintStart_toStartOf="@id/iv_shield"
+            app:layout_constraintTop_toBottomOf="@id/iv_shield" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/menu_log"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/menu_background"
+        app:layout_constraintEnd_toStartOf="@id/menu_report"
+        app:layout_constraintBottom_toBottomOf="@id/menu_block_pass"
+        app:layout_constraintStart_toEndOf="@id/menu_block_pass"
+        app:layout_constraintTop_toTopOf="@id/menu_block_pass">
+
+        <ImageView
+            android:id="@+id/iv_log"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_rate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_log"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/pretendard_light"
+            android:text="필터링 로그"
+            android:textColor="@color/black"
+            android:textSize="@dimen/body_6"
+            app:layout_constraintEnd_toEndOf="@id/iv_log"
+            app:layout_constraintStart_toStartOf="@id/iv_log"
+            app:layout_constraintTop_toBottomOf="@id/iv_log" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/menu_report"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/menu_background"
+        app:layout_constraintBottom_toBottomOf="@id/menu_log"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/menu_log">
+
+        <ImageView
+            android:id="@+id/iv_report"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_flag"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_report"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/pretendard_light"
+            android:text="문제 신고"
+            android:textColor="@color/black"
+            android:textSize="@dimen/body_6"
+            app:layout_constraintEnd_toEndOf="@id/iv_report"
+            app:layout_constraintStart_toStartOf="@id/iv_report"
+            app:layout_constraintTop_toBottomOf="@id/iv_report" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
