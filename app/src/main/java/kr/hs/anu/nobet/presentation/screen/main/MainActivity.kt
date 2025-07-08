@@ -1,14 +1,19 @@
 package kr.hs.anu.nobet.presentation.screen.main
 
+import android.graphics.PorterDuff
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import kr.hs.anu.nobet.R
 import kr.hs.anu.nobet.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private val viewModel : MainViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,6 +25,26 @@ class MainActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        //버튼 상태값 읽고 값에 따라 상태 바꾸기
+        viewModel.btnState.observe(this) { btnState ->
+            //차단 전원 버튼 색 변경
+            binding.layoutBlockBtn.setBackgroundResource (
+                if(btnState) R.drawable.block_btn_on else R.drawable.block_btn_background
+            )
+
+            //차단된 사이트 수 텍스트 색 변경
+            val block_txt_color = ContextCompat.getColor(this, if (btnState) R.color.red else R.color.gray)
+            binding.tvBlockNum.setTextColor(block_txt_color)
+
+            //차단 전원 버튼 아이콘 색 변경
+            val power_icon_color = ContextCompat.getColor(this, if(btnState) R.color.white else R.color.black)
+            binding.ivPower.setColorFilter(power_icon_color, PorterDuff.Mode.SRC_IN)
+        }
+
+        binding.layoutBlockBtn.setOnClickListener {
+            viewModel.toggle()
         }
     }
 }
