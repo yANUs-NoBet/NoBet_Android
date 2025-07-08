@@ -1,15 +1,24 @@
 package kr.hs.anu.nobet.presentation.screen.main
 
+import android.graphics.Color
 import android.graphics.PorterDuff
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.PopupWindow
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import kr.hs.anu.nobet.R
 import kr.hs.anu.nobet.databinding.ActivityMainBinding
+import androidx.core.graphics.drawable.toDrawable
 
 class MainActivity : AppCompatActivity() {
 
@@ -54,8 +63,41 @@ class MainActivity : AppCompatActivity() {
                 getString(if (btnState) R.string.on_view_title else R.string.off_view_title)
         }
 
+        //전원 버튼 클릭했을때 상태변화 함수 뷰 모델에서 호출
         binding.layoutBlockBtn.setOnClickListener {
             viewModel.toggle()
         }
+
+        //메뉴
+        binding.ivMenu.setOnClickListener { 
+            showMenu(it)
+        }
+    }
+
+    //메뉴 커스텀 함수
+    private fun showMenu(anchor: View) {
+        val popupMenu = LayoutInflater.from(anchor.context).inflate(R.layout.popup_menu, null)
+
+        val popupWindow = PopupWindow(
+            popupMenu,
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            true
+        )
+
+        popupWindow.isOutsideTouchable = true
+        popupWindow.elevation = 10f
+
+        popupWindow.setBackgroundDrawable(Color.TRANSPARENT.toDrawable())
+
+        popupWindow.showAsDropDown(anchor, 0, 30)
+
+        popupMenu.findViewById<ConstraintLayout>(R.id.menu_login).setOnClickListener {
+            //TODO 로그인 화면으로 이동
+            Toast.makeText(anchor.context, "로그인 클릭됨", Toast.LENGTH_SHORT).show()
+            popupWindow.dismiss()
+        }
+        
+        //TODO 다른 메뉴도 클릭시 동작 추가
     }
 }
