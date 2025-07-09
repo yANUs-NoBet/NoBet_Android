@@ -22,5 +22,10 @@ class LoginActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        // logo 누르면 홈으로 이동
+        binding.ivTopbarLogo.setOnClickListener {
+            finish()
+        }
     }
 }
