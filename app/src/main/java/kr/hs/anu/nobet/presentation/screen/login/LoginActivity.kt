@@ -1,7 +1,5 @@
 package kr.hs.anu.nobet.presentation.screen.login
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -10,13 +8,12 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import kr.hs.anu.nobet.R
 import kr.hs.anu.nobet.databinding.ActivityLoginBinding
-import androidx.core.net.toUri
 import kr.hs.anu.nobet.utils.openPage
 
 class LoginActivity : AppCompatActivity() {
 
-    private val viewModel : LoginViewModel by viewModels()
-    private lateinit var binding : ActivityLoginBinding
+    private val viewModel: LoginViewModel by viewModels()
+    private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
