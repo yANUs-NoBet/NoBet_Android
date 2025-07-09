@@ -85,19 +85,37 @@ class MainActivity : AppCompatActivity() {
             true
         )
 
+
+        //다른 영역 클릭시 닫힘
         popupWindow.isOutsideTouchable = true
         popupWindow.elevation = 10f
 
+        //popupWindow를 감싸는 배경, 배경이 있어야 다른 영역 클릭시 닫힘
         popupWindow.setBackgroundDrawable(Color.TRANSPARENT.toDrawable())
 
+        //기존 뷰 아래에 띄우기
         popupWindow.showAsDropDown(anchor, 0, 30)
 
+        //TODO 이동 처리는 다음 branch 에서 화면 만들고 거기서 이어줄 예정
         popupMenu.findViewById<ConstraintLayout>(R.id.menu_login).setOnClickListener {
             //TODO 로그인 화면으로 이동
             Toast.makeText(anchor.context, "로그인 클릭됨", Toast.LENGTH_SHORT).show()
             popupWindow.dismiss()
         }
-        
-        //TODO 다른 메뉴도 클릭시 동작 추가
+
+        popupMenu.findViewById<ConstraintLayout>(R.id.menu_block_pass).setOnClickListener {
+            Toast.makeText(anchor.context, "차단 제외 하기", Toast.LENGTH_SHORT).show()
+            popupWindow.dismiss()
+        }
+
+        popupMenu.findViewById<ConstraintLayout>(R.id.menu_log).setOnClickListener {
+            Toast.makeText(anchor.context, "필터링 로그", Toast.LENGTH_SHORT).show()
+            popupWindow.dismiss()
+        }
+
+        popupMenu.findViewById<ConstraintLayout>(R.id.menu_report).setOnClickListener {
+            Toast.makeText(anchor.context, "문제 신고", Toast.LENGTH_SHORT).show()
+            popupWindow.dismiss()
+        }
     }
 }
