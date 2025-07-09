@@ -23,6 +23,8 @@ class AllowActivity : AppCompatActivity() {
             insets
         }
 
-        
+        binding.ivTopbarLogo.setOnClickListener {
+            finish()
+        }
     }
 }
