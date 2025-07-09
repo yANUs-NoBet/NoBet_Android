@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -14,6 +15,7 @@ import kr.hs.anu.nobet.utils.openPage
 
 class LoginActivity : AppCompatActivity() {
 
+    private val viewModel : LoginViewModel by viewModels()
     private lateinit var binding : ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,8 +34,9 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
 
+        // 로그인 -> 처리는 viewModel
         binding.btnLogin.setOnClickListener {
-            //TODO 로그인 로직 구현 예정
+            viewModel.do_login()
         }
 
         // 온라인 상담 바로가기
