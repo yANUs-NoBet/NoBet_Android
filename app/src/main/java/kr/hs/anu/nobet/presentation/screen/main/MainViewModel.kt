@@ -6,11 +6,11 @@ import androidx.lifecycle.ViewModel
 
 class MainViewModel : ViewModel() {
 
-    //버튼 상태
+    // 버튼 상태
     private val _btnState = MutableLiveData(false)
-    val btnState : LiveData<Boolean> = _btnState
+    val btnState: LiveData<Boolean> = _btnState
 
-    //버튼 상태 관리
+    // 버튼 상태 관리
     fun toggle() {
         _btnState.value = !(_btnState.value ?: false)
     }
