@@ -1,5 +1,6 @@
 package kr.hs.anu.nobet.presentation.screen.main
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
@@ -18,6 +19,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import kr.hs.anu.nobet.R
 import kr.hs.anu.nobet.databinding.ActivityMainBinding
+import kr.hs.anu.nobet.presentation.screen.login.LoginActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -96,8 +98,8 @@ class MainActivity : AppCompatActivity() {
 
         // TODO 이동 처리는 다음 branch 에서 화면 만들고 거기서 이어줄 예정
         popupMenu.findViewById<ConstraintLayout>(R.id.menu_login).setOnClickListener {
-            // TODO 로그인 화면으로 이동
-            Toast.makeText(anchor.context, "로그인 클릭됨", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
             popupWindow.dismiss()
         }
 
