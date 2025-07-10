@@ -2,14 +2,17 @@ package kr.hs.anu.nobet.presentation.screen.allow
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import kr.hs.anu.nobet.R
 import kr.hs.anu.nobet.databinding.ActivityAllowBinding
+import kr.hs.anu.nobet.utils.openPage
 
 class AllowActivity : AppCompatActivity() {
 
+    private val viewModel : AllowViewModel by viewModels()
     private lateinit var binding : ActivityAllowBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +28,10 @@ class AllowActivity : AppCompatActivity() {
 
         binding.ivTopbarLogo.setOnClickListener {
             finish()
+        }
+
+        binding.tvMobile.setOnClickListener {
+            this.openPage()
         }
     }
 }
