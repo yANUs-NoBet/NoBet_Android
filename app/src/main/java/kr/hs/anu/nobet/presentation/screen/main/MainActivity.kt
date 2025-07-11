@@ -19,6 +19,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import kr.hs.anu.nobet.R
 import kr.hs.anu.nobet.databinding.ActivityMainBinding
+import kr.hs.anu.nobet.presentation.screen.allow.AllowActivity
 import kr.hs.anu.nobet.presentation.screen.login.LoginActivity
 
 class MainActivity : AppCompatActivity() {
@@ -104,7 +105,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         popupMenu.findViewById<ConstraintLayout>(R.id.menu_block_pass).setOnClickListener {
-            Toast.makeText(anchor.context, "차단 제외 하기", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, AllowActivity::class.java)
+            startActivity(intent)
             popupWindow.dismiss()
         }
 
