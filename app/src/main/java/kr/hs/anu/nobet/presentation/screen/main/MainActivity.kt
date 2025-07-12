@@ -21,6 +21,7 @@ import kr.hs.anu.nobet.R
 import kr.hs.anu.nobet.databinding.ActivityMainBinding
 import kr.hs.anu.nobet.presentation.screen.allow.AllowActivity
 import kr.hs.anu.nobet.presentation.screen.login.LoginActivity
+import kr.hs.anu.nobet.utils.openPage
 
 class MainActivity : AppCompatActivity() {
 
@@ -73,6 +74,11 @@ class MainActivity : AppCompatActivity() {
         // 메뉴
         binding.ivMenu.setOnClickListener {
             showMenu(it)
+        }
+
+        //온라인 상담 연결
+        binding.tvMobile.setOnClickListener {
+            this.openPage()
         }
     }
 
