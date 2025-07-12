@@ -99,6 +99,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_allow_site">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_allow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="20dp"
+            tools:listitem="@layout/allow_item" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
