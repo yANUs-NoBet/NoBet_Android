@@ -7,6 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import kr.hs.anu.nobet.R
 import kr.hs.anu.nobet.databinding.ActivityBlockListBinding
+import kr.hs.anu.nobet.utils.openPage
 
 class BlockListActivity : AppCompatActivity() {
 
@@ -26,6 +27,10 @@ class BlockListActivity : AppCompatActivity() {
         // 로고 클릭시 메인 화면으로
         binding.ivTopbarLogo.setOnClickListener {
             finish()
+        }
+
+        binding.tvMobile.setOnClickListener {
+            this.openPage()
         }
     }
 }
