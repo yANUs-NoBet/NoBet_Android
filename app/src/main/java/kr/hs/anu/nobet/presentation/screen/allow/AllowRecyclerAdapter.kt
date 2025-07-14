@@ -20,11 +20,11 @@ class AllowRecyclerAdapter : RecyclerView.Adapter<AllowRecyclerAdapter.AllowView
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: AllowSiteData) {
-            //TODO 데이터 넣어주기
+            // TODO 데이터 넣어주기
             binding.tvAllowSite.text = item.siteUrl
 
             binding.btnDel.setOnClickListener {
-                //TODO 삭제
+                // TODO 삭제
             }
         }
     }

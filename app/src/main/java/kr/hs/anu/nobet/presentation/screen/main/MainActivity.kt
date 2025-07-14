@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
             showMenu(it)
         }
 
-        //온라인 상담 연결
+        // 온라인 상담 연결
         binding.tvMobile.setOnClickListener {
             this.openPage()
         }

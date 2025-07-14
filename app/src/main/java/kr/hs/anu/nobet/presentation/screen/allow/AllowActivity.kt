@@ -13,8 +13,8 @@ import kr.hs.anu.nobet.utils.openPage
 
 class AllowActivity : AppCompatActivity() {
 
-    private val viewModel : AllowViewModel by viewModels()
-    private lateinit var binding : ActivityAllowBinding
+    private val viewModel: AllowViewModel by viewModels()
+    private lateinit var binding: ActivityAllowBinding
     private lateinit var allowAdapter: AllowRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
