@@ -2,6 +2,7 @@ package kr.hs.anu.nobet.presentation.screen.block_list
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -11,6 +12,7 @@ import kr.hs.anu.nobet.utils.openPage
 
 class BlockListActivity : AppCompatActivity() {
 
+    private val viewModel: BlockListViewModel by viewModels()
     private lateinit var binding: ActivityBlockListBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
