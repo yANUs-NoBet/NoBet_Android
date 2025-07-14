@@ -19,7 +19,9 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import kr.hs.anu.nobet.R
 import kr.hs.anu.nobet.databinding.ActivityMainBinding
+import kr.hs.anu.nobet.presentation.screen.allow.AllowActivity
 import kr.hs.anu.nobet.presentation.screen.login.LoginActivity
+import kr.hs.anu.nobet.utils.openPage
 
 class MainActivity : AppCompatActivity() {
 
@@ -73,6 +75,11 @@ class MainActivity : AppCompatActivity() {
         binding.ivMenu.setOnClickListener {
             showMenu(it)
         }
+
+        // 온라인 상담 연결
+        binding.tvMobile.setOnClickListener {
+            this.openPage()
+        }
     }
 
     // 메뉴 커스텀 함수
@@ -104,7 +111,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         popupMenu.findViewById<ConstraintLayout>(R.id.menu_block_pass).setOnClickListener {
-            Toast.makeText(anchor.context, "차단 제외 하기", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, AllowActivity::class.java)
+            startActivity(intent)
             popupWindow.dismiss()
         }
 
