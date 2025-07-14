@@ -22,5 +22,10 @@ class BlockListActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        // 로고 클릭시 메인 화면으로
+        binding.ivTopbarLogo.setOnClickListener {
+            finish()
+        }
     }
 }
