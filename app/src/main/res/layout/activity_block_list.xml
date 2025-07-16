@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".presentation.screen.allow.AllowActivity">
+    tools:context=".presentation.screen.blockList.BlockListActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_topBar"
@@ -47,44 +47,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/pretendard_medium"
-        android:text="접근 허용 사이트"
+        android:text="차단 사이트 목록"
         android:textColor="@color/black"
         android:textSize="@dimen/body_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_top_title" />
-
-    <EditText
-        android:id="@+id/et_allow_site"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/et_site_background"
-        android:fontFamily="@font/pretendard_regular"
-        android:hint="예 : example.com"
-        android:paddingHorizontal="10dp"
-        android:paddingVertical="13dp"
-        android:textColor="@color/black"
-        android:textSize="@dimen/body_5"
-        app:layout_constraintEnd_toStartOf="@id/btn_add"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_add"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/add_btn"
-        android:fontFamily="@font/pretendard_regular"
-        android:text="추가"
-        android:textColor="@color/white"
-        android:textSize="@dimen/body_5"
-        app:layout_constraintBottom_toBottomOf="@id/et_allow_site"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/et_allow_site" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_site_list"
@@ -97,14 +65,14 @@
         app:layout_constraintBottom_toTopOf="@id/layout_gambling_prevent_info_box"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_allow_site">
+        app:layout_constraintTop_toBottomOf="@id/tv_title">
 
         <TextView
             android:id="@+id/tv_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_regular"
-            android:text="차단 제외 사이트가 없습니다"
+            android:text="차단 된 사이트가 없습니다"
             android:textColor="@color/gray"
             android:textSize="@dimen/body_5"
             android:visibility="invisible"
@@ -114,11 +82,41 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_allow"
+            android:id="@+id/recycler_block"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="20dp"
-            tools:listitem="@layout/allow_item" />
+            tools:listitem="@layout/block_item" />
+
+        <ImageView
+            android:id="@+id/btn_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/ic_left_arrow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_page"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Page 1/1"
+            app:layout_constraintBottom_toBottomOf="@id/btn_left"
+            app:layout_constraintEnd_toStartOf="@id/btn_right"
+            app:layout_constraintStart_toEndOf="@id/btn_left"
+            app:layout_constraintTop_toTopOf="@id/btn_left" />
+
+        <ImageView
+            android:id="@+id/btn_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="100dp"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/ic_right_arrow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -20,6 +20,7 @@ import androidx.core.view.WindowInsetsCompat
 import kr.hs.anu.nobet.R
 import kr.hs.anu.nobet.databinding.ActivityMainBinding
 import kr.hs.anu.nobet.presentation.screen.allow.AllowActivity
+import kr.hs.anu.nobet.presentation.screen.blockList.BlockListActivity
 import kr.hs.anu.nobet.presentation.screen.login.LoginActivity
 import kr.hs.anu.nobet.utils.openPage
 
@@ -117,7 +118,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         popupMenu.findViewById<ConstraintLayout>(R.id.menu_log).setOnClickListener {
-            Toast.makeText(anchor.context, "필터링 로그", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, BlockListActivity::class.java)
+            startActivity(intent)
             popupWindow.dismiss()
         }
 
