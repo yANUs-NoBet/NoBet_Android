@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import kr.hs.anu.nobet.R
 import kr.hs.anu.nobet.databinding.ActivityBlockListBinding
 import kr.hs.anu.nobet.utils.openPage
@@ -14,6 +15,7 @@ class BlockListActivity : AppCompatActivity() {
 
     private val viewModel: BlockListViewModel by viewModels()
     private lateinit var binding: ActivityBlockListBinding
+    private lateinit var blockAdapter: BlockRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +35,19 @@ class BlockListActivity : AppCompatActivity() {
 
         binding.tvMobile.setOnClickListener {
             this.openPage()
+        }
+
+        //TODO 페이징 사용 예정
+
+        // Adapter
+        blockAdapter = BlockRecyclerAdapter()
+        binding.recyclerBlock.apply {
+            layoutManager = LinearLayoutManager(this@BlockListActivity)
+            adapter = blockAdapter
+        }
+
+        viewModel.siteList.observe(this) { list ->
+            blockAdapter.submitList(list)
         }
     }
 }
