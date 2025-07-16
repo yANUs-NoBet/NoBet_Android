@@ -1,4 +1,4 @@
-package kr.hs.anu.nobet.presentation.screen.block_list
+package kr.hs.anu.nobet.presentation.screen.blockList
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

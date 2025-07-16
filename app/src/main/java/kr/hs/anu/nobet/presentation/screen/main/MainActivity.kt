@@ -20,7 +20,7 @@ import androidx.core.view.WindowInsetsCompat
 import kr.hs.anu.nobet.R
 import kr.hs.anu.nobet.databinding.ActivityMainBinding
 import kr.hs.anu.nobet.presentation.screen.allow.AllowActivity
-import kr.hs.anu.nobet.presentation.screen.block_list.BlockListActivity
+import kr.hs.anu.nobet.presentation.screen.blockList.BlockListActivity
 import kr.hs.anu.nobet.presentation.screen.login.LoginActivity
 import kr.hs.anu.nobet.utils.openPage
 

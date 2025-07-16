@@ -1,4 +1,4 @@
-package kr.hs.anu.nobet.presentation.screen.block_list
+package kr.hs.anu.nobet.presentation.screen.blockList
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -37,7 +37,7 @@ class BlockListActivity : AppCompatActivity() {
             this.openPage()
         }
 
-        //TODO 페이징 사용 예정
+        // TODO 페이징 사용 예정
 
         // Adapter
         blockAdapter = BlockRecyclerAdapter()

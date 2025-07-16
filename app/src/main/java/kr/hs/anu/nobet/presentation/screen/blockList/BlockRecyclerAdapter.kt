@@ -1,4 +1,4 @@
-package kr.hs.anu.nobet.presentation.screen.block_list
+package kr.hs.anu.nobet.presentation.screen.blockList
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
