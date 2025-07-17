@@ -7,6 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import kr.hs.anu.nobet.R
 import kr.hs.anu.nobet.databinding.ActivityReportBinding
+import kr.hs.anu.nobet.utils.openPage
 
 class ReportActivity : AppCompatActivity() {
 
@@ -26,6 +27,11 @@ class ReportActivity : AppCompatActivity() {
         //로고 클릭시 메인으로
         binding.ivTopbarLogo.setOnClickListener {
             finish()
+        }
+
+        //온라인 상담
+        binding.tvMobile.setOnClickListener {
+            this.openPage()
         }
     }
 }
