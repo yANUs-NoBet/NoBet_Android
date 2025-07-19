@@ -7,7 +7,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.transition.Visibility
 import kr.hs.anu.nobet.R
 import kr.hs.anu.nobet.databinding.ActivityReportBinding
 import kr.hs.anu.nobet.utils.openPage
@@ -32,12 +31,12 @@ class ReportActivity : AppCompatActivity() {
             binding.layoutReportMenu.visibility = if (spinnerState) View.VISIBLE else View.INVISIBLE
         }
 
-        //로고 클릭시 메인으로
+        // 로고 클릭시 메인으로
         binding.ivTopbarLogo.setOnClickListener {
             finish()
         }
 
-        //온라인 상담
+        // 온라인 상담
         binding.tvMobile.setOnClickListener {
             this.openPage()
         }
@@ -50,6 +49,6 @@ class ReportActivity : AppCompatActivity() {
             viewModel.toggle()
         }
 
-        //TODO menu 값 클릭했을때 선택값으로 텍스트 변경 및 데이터 처리
+        // TODO menu 값 클릭했을때 선택값으로 텍스트 변경 및 데이터 처리
     }
 }
