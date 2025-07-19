@@ -103,6 +103,59 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_report_menu"
+        android:layout_width="0dp"
+        android:layout_height="90dp"
+        android:background="@drawable/report_background"
+        android:elevation="1dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@id/layout_spinner"
+        app:layout_constraintStart_toStartOf="@id/layout_spinner"
+        app:layout_constraintTop_toBottomOf="@id/layout_spinner">
+
+        <TextView
+            android:id="@+id/tv_site_report"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:padding="5dp"
+            android:text="도박 사이트 신고"
+            android:textColor="@color/black"
+            android:textSize="@dimen/body_5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_fake_block_report"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_regular"
+            android:padding="5dp"
+            android:text="허위 차단 신고"
+            android:textColor="@color/black"
+            android:textSize="@dimen/body_5"
+            app:layout_constraintEnd_toEndOf="@id/tv_site_report"
+            app:layout_constraintStart_toStartOf="@id/tv_site_report"
+            app:layout_constraintTop_toBottomOf="@id/tv_site_report" />
+
+        <TextView
+            android:id="@+id/tv_other_report"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_regular"
+            android:padding="5dp"
+            android:text="기타 신고"
+            android:textColor="@color/black"
+            android:textSize="@dimen/body_5"
+            app:layout_constraintEnd_toEndOf="@id/tv_site_report"
+            app:layout_constraintStart_toStartOf="@id/tv_site_report"
+            app:layout_constraintTop_toBottomOf="@id/tv_fake_block_report" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <TextView
         android:id="@+id/tv_report_url"
         android:layout_width="wrap_content"
