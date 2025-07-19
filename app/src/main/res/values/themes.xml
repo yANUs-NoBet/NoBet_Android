@@ -3,7 +3,10 @@
     <style name="Base.Theme.NoBet" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:statusBarColor">@color/orange</item>
     </style>
 
     <style name="Theme.NoBet" parent="Base.Theme.NoBet" />
+
+    <style name="Theme.NoBet.Splash" parent="Base.Theme.NoBet" />
 </resources>

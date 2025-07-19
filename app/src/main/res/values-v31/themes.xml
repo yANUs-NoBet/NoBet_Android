@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+        <style name="Theme.NoBet.Splash" parent="Base.Theme.NoBet">
+                <!-- Android 12 이상 자동 Splash 최소화 -->
+                <item name="android:windowSplashScreenBackground">@android:color/transparent</item>
+                <item name="android:windowSplashScreenAnimatedIcon">@null</item>
+                <item name="android:windowSplashScreenIconBackgroundColor">
+                        @android:color/transparent
+                </item>
+                <!-- 자동 splash가 끝난 후 기본 테마로 전환 -->
+                <item name="postSplashScreenTheme">@style/Theme.NoBet</item>
+        </style>
+</resources>

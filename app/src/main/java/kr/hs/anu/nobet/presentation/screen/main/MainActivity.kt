@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -22,6 +21,7 @@ import kr.hs.anu.nobet.databinding.ActivityMainBinding
 import kr.hs.anu.nobet.presentation.screen.allow.AllowActivity
 import kr.hs.anu.nobet.presentation.screen.blockList.BlockListActivity
 import kr.hs.anu.nobet.presentation.screen.login.LoginActivity
+import kr.hs.anu.nobet.presentation.screen.report.ReportActivity
 import kr.hs.anu.nobet.utils.openPage
 
 class MainActivity : AppCompatActivity() {
@@ -124,7 +124,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         popupMenu.findViewById<ConstraintLayout>(R.id.menu_report).setOnClickListener {
-            Toast.makeText(anchor.context, "문제 신고", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, ReportActivity::class.java)
+            startActivity(intent)
             popupWindow.dismiss()
         }
     }

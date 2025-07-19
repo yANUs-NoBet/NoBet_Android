@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".presentation.screen.report.ReportActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_topBar"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_topbar_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/top_bar_logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tv_top_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/pretendard_regular"
+        android:text="@string/top_title"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/body_5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_topBar" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/pretendard_medium"
+        android:text="신고 하기"
+        android:textColor="@color/black"
+        android:textSize="@dimen/body_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_top_title" />
+
+    <TextView
+        android:id="@+id/tv_report_kind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/pretendard_regular"
+        android:text="신고 유형"
+        android:textColor="@color/black"
+        android:textSize="@dimen/body_5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_spinner"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/report_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_report_kind">
+
+        <TextView
+            android:id="@+id/tv_report_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:text="도박 사이트 신고"
+            android:textColor="@color/black"
+            android:textSize="@dimen/body_5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_drop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_down_arrow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_report_menu"
+        android:layout_width="0dp"
+        android:layout_height="90dp"
+        android:background="@drawable/report_background"
+        android:elevation="1dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@id/layout_spinner"
+        app:layout_constraintStart_toStartOf="@id/layout_spinner"
+        app:layout_constraintTop_toBottomOf="@id/layout_spinner">
+
+        <TextView
+            android:id="@+id/tv_site_report"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:padding="5dp"
+            android:text="도박 사이트 신고"
+            android:textColor="@color/black"
+            android:textSize="@dimen/body_5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_fake_block_report"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_regular"
+            android:padding="5dp"
+            android:text="허위 차단 신고"
+            android:textColor="@color/black"
+            android:textSize="@dimen/body_5"
+            app:layout_constraintEnd_toEndOf="@id/tv_site_report"
+            app:layout_constraintStart_toStartOf="@id/tv_site_report"
+            app:layout_constraintTop_toBottomOf="@id/tv_site_report" />
+
+        <TextView
+            android:id="@+id/tv_other_report"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_regular"
+            android:padding="5dp"
+            android:text="기타 신고"
+            android:textColor="@color/black"
+            android:textSize="@dimen/body_5"
+            app:layout_constraintEnd_toEndOf="@id/tv_site_report"
+            app:layout_constraintStart_toStartOf="@id/tv_site_report"
+            app:layout_constraintTop_toBottomOf="@id/tv_fake_block_report" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tv_report_url"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/pretendard_regular"
+        android:text="신고할 URL (선택)"
+        android:textColor="@color/black"
+        android:textSize="@dimen/body_5"
+        app:layout_constraintStart_toStartOf="@id/tv_report_kind"
+        app:layout_constraintTop_toBottomOf="@id/layout_spinner" />
+
+    <EditText
+        android:id="@+id/et_report_url"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/report_background"
+        android:fontFamily="@font/pretendard_regular"
+        android:hint="예 : example.com"
+        android:paddingHorizontal="20dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/body_5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_report_url" />
+
+    <TextView
+        android:id="@+id/tv_report"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/pretendard_regular"
+        android:text="신고 내용"
+        android:textColor="@color/black"
+        android:textSize="@dimen/body_5"
+        app:layout_constraintStart_toStartOf="@id/tv_report_url"
+        app:layout_constraintTop_toBottomOf="@id/et_report_url" />
+
+    <EditText
+        android:id="@+id/et_report"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="39dp"
+        android:background="@drawable/report_background"
+        android:fontFamily="@font/pretendard_regular"
+        android:gravity="top"
+        android:hint="문제를 설명해주세요"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/body_5"
+        app:layout_constraintBottom_toTopOf="@id/btn_report"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_report" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_report"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/report_btn_background"
+        android:fontFamily="@font/pretendard_medium"
+        android:text="신고 제출"
+        android:textColor="@color/white"
+        android:textSize="@dimen/body_4"
+        app:layout_constraintBottom_toTopOf="@id/layout_gambling_prevent_info_box"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_gambling_prevent_info_box"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/gambling_prevent_info_box"
+        android:paddingHorizontal="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/tv_num_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/pretendard_medium"
+            android:text="@string/num_info"
+            android:textColor="@color/black"
+            android:textSize="@dimen/body_6"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="|"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/body_5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tv_mobile"
+            app:layout_constraintStart_toEndOf="@id/tv_num_info"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_mobile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="@font/pretendard_medium"
+            android:text="@string/mobile_info"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/body_6"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
