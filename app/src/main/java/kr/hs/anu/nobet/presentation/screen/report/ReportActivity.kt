@@ -49,6 +49,27 @@ class ReportActivity : AppCompatActivity() {
             viewModel.toggle()
         }
 
-        // TODO menu 값 클릭했을때 선택값으로 텍스트 변경 및 데이터 처리
+        // TODO menu 값 클릭했을때 선택값으로 데이터 처리 (서버랑 연결하면서 처리)
+        binding.tvSiteReport.setOnClickListener(clickListener)
+        binding.tvFakeBlockReport.setOnClickListener(clickListener)
+        binding.tvOtherReport.setOnClickListener(clickListener)
+
+    }
+
+    private val clickListener = View.OnClickListener { view ->
+        when(view.id) {
+            R.id.tv_site_report -> {
+                binding.tvReportInfo.text = binding.tvSiteReport.text
+                viewModel.toggle()
+            }
+            R.id.tv_fake_block_report -> {
+                binding.tvReportInfo.text = binding.tvFakeBlockReport.text
+                viewModel.toggle()
+            }
+            R.id.tv_other_report -> {
+                binding.tvReportInfo.text = binding.tvOtherReport.text
+                viewModel.toggle()
+            }
+        }
     }
 }
