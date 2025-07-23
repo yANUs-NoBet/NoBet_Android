@@ -53,11 +53,10 @@ class ReportActivity : AppCompatActivity() {
         binding.tvSiteReport.setOnClickListener(clickListener)
         binding.tvFakeBlockReport.setOnClickListener(clickListener)
         binding.tvOtherReport.setOnClickListener(clickListener)
-
     }
 
     private val clickListener = View.OnClickListener { view ->
-        when(view.id) {
+        when (view.id) {
             R.id.tv_site_report -> {
                 binding.tvReportInfo.text = binding.tvSiteReport.text
                 viewModel.toggle()
