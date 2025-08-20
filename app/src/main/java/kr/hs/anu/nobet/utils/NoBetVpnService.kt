@@ -4,7 +4,6 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
-import android.health.connect.datatypes.units.Length
 import android.net.VpnService
 import android.os.Build
 import android.os.ParcelFileDescriptor
@@ -20,13 +19,47 @@ import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
 class NoBetVpnService: VpnService() {
+
+    companion object {
+        const val ACTION_STOP = "kr.hs.anu.nobet.ACTION_STOP"
+        @Volatile var isRunning = false
+    }
+
     private var vpnInterface: ParcelFileDescriptor? = null
     private var worker: Thread? = null
+    private var lastStartId: Int = 0
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        startForegroundWithNotification()
-        startTunReader()
-        return START_STICKY
+        when (intent?.action) {
+            ACTION_STOP -> {
+                shutdown()
+                // 알림 즉시 내리기
+                if (android.os.Build.VERSION.SDK_INT >= 24)
+                    stopForeground(STOP_FOREGROUND_REMOVE)
+                else
+                    stopForeground(true)
+                isRunning = false
+                stopSelf()
+                return START_NOT_STICKY
+            }
+            else -> {
+                // "시작" 경로에서는 반드시 바로 알림 올리기
+                startForegroundWithNotification()
+                isRunning = true
+                startTunReader()
+                return START_STICKY
+            }
+        }
+    }
+
+
+    private fun shutdown() {
+        worker?.interrupt()
+        try { worker?.join(500) } catch (_: InterruptedException) {}
+        worker = null
+
+        try { vpnInterface?.close() } catch (_: Exception) {}
+        vpnInterface = null
     }
 
     private fun startTunReader() {
@@ -343,21 +376,14 @@ class NoBetVpnService: VpnService() {
     }
 
     override fun onDestroy() {
-        worker?.interrupt()
-        try { worker?.join(500) } catch (_: InterruptedException) {}
-        worker = null
-
-        try { vpnInterface?.close() } catch (_: Exception) {}
-        vpnInterface = null
-
+        shutdown()
         try {
-            if (Build.VERSION.SDK_INT >= 24) {
+            if (android.os.Build.VERSION.SDK_INT >= 24)
                 stopForeground(STOP_FOREGROUND_REMOVE)
-            } else {
+            else
                 stopForeground(true)
-            }
         } catch (_: Exception) {}
-
+        isRunning = false
         super.onDestroy()
     }
 }

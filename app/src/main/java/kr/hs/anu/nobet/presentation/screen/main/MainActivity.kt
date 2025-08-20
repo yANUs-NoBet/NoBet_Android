@@ -154,6 +154,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun stopVpn() {
+        // 서비스가 떠 있을 때만 STOP 액션 전달 (foregroundService 금지!)
+        if (NoBetVpnService.isRunning) {
+            startService(Intent(this, NoBetVpnService::class.java).apply {
+                action = NoBetVpnService.ACTION_STOP
+            })
+        }
+        // 보조: 실행 중이면 종료, 아니면 그냥 무시됨
         stopService(Intent(this, NoBetVpnService::class.java))
     }
 }
