@@ -18,10 +18,11 @@ import java.net.InetSocketAddress
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
-class NoBetVpnService: VpnService() {
+class NoBetVpnService : VpnService() {
 
     companion object {
         const val ACTION_STOP = "kr.hs.anu.nobet.ACTION_STOP"
+
         @Volatile var isRunning = false
     }
 
@@ -34,10 +35,11 @@ class NoBetVpnService: VpnService() {
             ACTION_STOP -> {
                 shutdown()
                 // 알림 즉시 내리기
-                if (android.os.Build.VERSION.SDK_INT >= 24)
+                if (android.os.Build.VERSION.SDK_INT >= 24) {
                     stopForeground(STOP_FOREGROUND_REMOVE)
-                else
+                } else {
                     stopForeground(true)
+                }
                 isRunning = false
                 stopSelf()
                 return START_NOT_STICKY
@@ -51,7 +53,6 @@ class NoBetVpnService: VpnService() {
             }
         }
     }
-
 
     private fun shutdown() {
         worker?.interrupt()
@@ -74,9 +75,9 @@ class NoBetVpnService: VpnService() {
             .addDnsServer("8.8.8.8")
             .addDnsServer("1.1.1.1")
 
-        builder.addAllowedApplication("com.android.chrome")            // 크롬
-        builder.addAllowedApplication("com.sec.android.app.sbrowser")  // 삼성 인터넷
-        builder.addAllowedApplication("com.microsoft.emmx")            // 엣지
+        builder.addAllowedApplication("com.android.chrome") // 크롬
+        builder.addAllowedApplication("com.sec.android.app.sbrowser") // 삼성 인터넷
+        builder.addAllowedApplication("com.microsoft.emmx") // 엣지
 
         try { builder.addDisallowedApplication(packageName) } catch (_: Exception) {}
 
@@ -90,20 +91,19 @@ class NoBetVpnService: VpnService() {
             try {
                 val fd = vpnInterface?.fileDescriptor ?: return@Thread
                 val input = FileInputStream(fd)
-                val output = FileOutputStream(fd) //응답을 TUN으로 써줄 Output
+                val output = FileOutputStream(fd) // 응답을 TUN으로 써줄 Output
                 val packet = ByteArray(32767)
 
                 while (!Thread.interrupted()) {
                     val len = input.read(packet)
                     if (len <= 0) continue
-                    handlePacket(packet, len, output)// 단순 로그 -> 포워딩 + 응답
+                    handlePacket(packet, len, output) // 단순 로그 -> 포워딩 + 응답
                 }
             } catch (e: Exception) {
                 Log.e("NoBetLogger", "Reader error", e)
                 stopSelf()
             }
         }.also { it.start() }
-
     }
 
     private val recentQueries = object : LinkedHashMap<String, Long>(512, 0.75f, true) {
@@ -124,12 +124,12 @@ class NoBetVpnService: VpnService() {
         if (len < 20) return
         val verIhl = buf[0].toInt() and 0xFF
         val version = verIhl ushr 4
-        if (version != 4) return //IPv4만 처리
+        if (version != 4) return // IPv4만 처리
         val ihl = (verIhl and 0x0f) * 4
         if (len < ihl + 8) return
 
         val protocol = buf[9].toInt() and 0xFF
-        if (protocol != 17) return //UDP만
+        if (protocol != 17) return // UDP만
 
         // IPv4 src/dst
         val srcIp = buf.copyOfRange(12, 16)
@@ -154,8 +154,8 @@ class NoBetVpnService: VpnService() {
         val upstream = try { InetAddress.getByAddress(dstIp) } catch (_: Exception) { null }
         val reply = forwardDns(upstream, dnsPayload) ?: return
 
-        //로그
-        //dnsPayload는 DNS 메시지 전체(헤더 포함)
+        // 로그
+        // dnsPayload는 DNS 메시지 전체(헤더 포함)
         if (dstPort == 53) {
             try {
                 if (dnsPayload.size >= 12) {
@@ -181,13 +181,15 @@ class NoBetVpnService: VpnService() {
                 // DNS parse failed
             }
         } else {
-            //..
+            // ..
         }
 
         // 응답을 IP + UDP로 재조립해서 TUN으로 쓰기
         val responsePacket = buildUdpIpResponse(
-            srcIp = dstIp, dstIp = srcIp,
-            srcPort = dstPort, dstPort = srcPort,
+            srcIp = dstIp,
+            dstIp = srcIp,
+            srcPort = dstPort,
+            dstPort = srcPort,
             payload = reply
         )
         output.write(responsePacket)
@@ -206,7 +208,7 @@ class NoBetVpnService: VpnService() {
                 buf.copyOf(resp.length)
             }
         } catch (e: Exception) {
-            //Forward DNS failed
+            // Forward DNS failed
             null
         }
     }
@@ -236,7 +238,7 @@ class NoBetVpnService: VpnService() {
         bb.put(srcIp)
         bb.put(dstIp)
 
-        //UDP header
+        // UDP header
         bb.putShort(srcPort.toShort())
         bb.putShort(dstPort.toShort())
         bb.putShort((udpHeaderLen + payload.size).toShort())
@@ -251,8 +253,12 @@ class NoBetVpnService: VpnService() {
 
         // UDP checksum with pseudo header
         val udpCsum = udpChecksum(
-            srcIp, dstIp, 17,
-            bb.array(), ihl, udpHeaderLen + payload.size
+            srcIp,
+            dstIp,
+            17,
+            bb.array(),
+            ihl,
+            udpHeaderLen + payload.size
         )
         bb.putShort(ihl + 6, udpCsum)
 
@@ -263,7 +269,7 @@ class NoBetVpnService: VpnService() {
         var sum = 0
         var i = offset
         while (i < offset + length) {
-            if (i == offset + 10 ) { i += 2; continue }
+            if (i == offset + 10) { i += 2; continue }
             val v = ((data[i].toInt() and 0xFF) shl 8) or (data[i + 1].toInt() and 0xFF)
             sum += v
             sum = (sum and 0xFFFF) + (sum ushr 16)
@@ -274,8 +280,12 @@ class NoBetVpnService: VpnService() {
     }
 
     private fun udpChecksum(
-        srcIp: ByteArray, dstIp: ByteArray, proto: Int,
-        data: ByteArray, udpOffset: Int, udpLen: Int
+        srcIp: ByteArray,
+        dstIp: ByteArray,
+        proto: Int,
+        data: ByteArray,
+        udpOffset: Int,
+        udpLen: Int
     ): Short {
         var sum = 0
 
@@ -378,10 +388,11 @@ class NoBetVpnService: VpnService() {
     override fun onDestroy() {
         shutdown()
         try {
-            if (android.os.Build.VERSION.SDK_INT >= 24)
+            if (android.os.Build.VERSION.SDK_INT >= 24) {
                 stopForeground(STOP_FOREGROUND_REMOVE)
-            else
+            } else {
                 stopForeground(true)
+            }
         } catch (_: Exception) {}
         isRunning = false
         super.onDestroy()

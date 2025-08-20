@@ -134,13 +134,15 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             popupWindow.dismiss()
         }
-
     }
 
     private fun startVpn() {
         val intent = VpnService.prepare(this)
-        if (intent != null) startActivityForResult(intent, REQ_PREPARE_VPN)
-        else onActivityResult(REQ_PREPARE_VPN, Activity.RESULT_OK, null)
+        if (intent != null) {
+            startActivityForResult(intent, REQ_PREPARE_VPN)
+        } else {
+            onActivityResult(REQ_PREPARE_VPN, Activity.RESULT_OK, null)
+        }
     }
 
     @Deprecated("Deprecated in Java")
@@ -148,7 +150,8 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQ_PREPARE_VPN && resultCode == Activity.RESULT_OK) {
             ContextCompat.startForegroundService(
-                this, Intent(this, NoBetVpnService::class.java)
+                this,
+                Intent(this, NoBetVpnService::class.java)
             )
         }
     }
@@ -156,9 +159,11 @@ class MainActivity : AppCompatActivity() {
     private fun stopVpn() {
         // 서비스가 떠 있을 때만 STOP 액션 전달 (foregroundService 금지!)
         if (NoBetVpnService.isRunning) {
-            startService(Intent(this, NoBetVpnService::class.java).apply {
-                action = NoBetVpnService.ACTION_STOP
-            })
+            startService(
+                Intent(this, NoBetVpnService::class.java).apply {
+                    action = NoBetVpnService.ACTION_STOP
+                }
+            )
         }
         // 보조: 실행 중이면 종료, 아니면 그냥 무시됨
         stopService(Intent(this, NoBetVpnService::class.java))
