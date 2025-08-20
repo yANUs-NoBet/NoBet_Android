@@ -41,6 +41,10 @@ class NoBetVpnService: VpnService() {
             .addDnsServer("8.8.8.8")
             .addDnsServer("1.1.1.1")
 
+        builder.addAllowedApplication("com.android.chrome")            // 크롬
+        builder.addAllowedApplication("com.sec.android.app.sbrowser")  // 삼성 인터넷
+        builder.addAllowedApplication("com.microsoft.emmx")            // 엣지
+
         try { builder.addDisallowedApplication(packageName) } catch (_: Exception) {}
 
         vpnInterface = builder.establish()
@@ -59,7 +63,7 @@ class NoBetVpnService: VpnService() {
                 while (!Thread.interrupted()) {
                     val len = input.read(packet)
                     if (len <= 0) continue
-                    //handlePacket(packet, len, output)// 단순 로그 -> 포워딩 + 응답
+                    handlePacket(packet, len, output)// 단순 로그 -> 포워딩 + 응답
                 }
             } catch (e: Exception) {
                 Log.e("NoBetLogger", "Reader error", e)
@@ -250,7 +254,7 @@ class NoBetVpnService: VpnService() {
 
         // pseudo header
         for (i in 0 until 4 step 2) {
-            add16(((srcIp[i].toInt() and 0xFF) shl 0) or (srcIp[i + 1].toInt() and 0xFF))
+            add16(((srcIp[i].toInt() and 0xFF) shl 8) or (srcIp[i + 1].toInt() and 0xFF))
         }
         for (i in 0 until 4 step 2) {
             add16(((dstIp[i].toInt() and 0xFF) shl 8) or (dstIp[i + 1].toInt() and 0xFF))
@@ -340,7 +344,20 @@ class NoBetVpnService: VpnService() {
 
     override fun onDestroy() {
         worker?.interrupt()
-        vpnInterface?.close()
+        try { worker?.join(500) } catch (_: InterruptedException) {}
+        worker = null
+
+        try { vpnInterface?.close() } catch (_: Exception) {}
+        vpnInterface = null
+
+        try {
+            if (Build.VERSION.SDK_INT >= 24) {
+                stopForeground(STOP_FOREGROUND_REMOVE)
+            } else {
+                stopForeground(true)
+            }
+        } catch (_: Exception) {}
+
         super.onDestroy()
     }
 }
