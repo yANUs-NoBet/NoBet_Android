@@ -1,8 +1,10 @@
 package kr.hs.anu.nobet.presentation.screen.main
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.net.VpnService
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,10 +24,12 @@ import kr.hs.anu.nobet.presentation.screen.allow.AllowActivity
 import kr.hs.anu.nobet.presentation.screen.blockList.BlockListActivity
 import kr.hs.anu.nobet.presentation.screen.login.LoginActivity
 import kr.hs.anu.nobet.presentation.screen.report.ReportActivity
+import kr.hs.anu.nobet.utils.NoBetVpnService
 import kr.hs.anu.nobet.utils.openPage
 
 class MainActivity : AppCompatActivity() {
 
+    private val REQ_PREPARE_VPN = 1001
     private val viewModel: MainViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
 
@@ -42,6 +46,8 @@ class MainActivity : AppCompatActivity() {
 
         // 버튼 상태값 읽고 값에 따라 상태 바꾸기
         viewModel.btnState.observe(this) { btnState ->
+            if (btnState) startVpn() else stopVpn()
+
             // 차단 전원 버튼 색 변경
             binding.layoutBlockBtn.setBackgroundResource(
                 if (btnState) R.drawable.block_btn_on else R.drawable.block_btn_background
@@ -128,5 +134,38 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             popupWindow.dismiss()
         }
+    }
+
+    private fun startVpn() {
+        val intent = VpnService.prepare(this)
+        if (intent != null) {
+            startActivityForResult(intent, REQ_PREPARE_VPN)
+        } else {
+            onActivityResult(REQ_PREPARE_VPN, Activity.RESULT_OK, null)
+        }
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQ_PREPARE_VPN && resultCode == Activity.RESULT_OK) {
+            ContextCompat.startForegroundService(
+                this,
+                Intent(this, NoBetVpnService::class.java)
+            )
+        }
+    }
+
+    private fun stopVpn() {
+        // 서비스가 떠 있을 때만 STOP 액션 전달 (foregroundService 금지!)
+        if (NoBetVpnService.isRunning) {
+            startService(
+                Intent(this, NoBetVpnService::class.java).apply {
+                    action = NoBetVpnService.ACTION_STOP
+                }
+            )
+        }
+        // 보조: 실행 중이면 종료, 아니면 그냥 무시됨
+        stopService(Intent(this, NoBetVpnService::class.java))
     }
 }
